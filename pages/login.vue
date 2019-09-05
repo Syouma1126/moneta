@@ -13,7 +13,8 @@
           :value="id"
           @input="name = $event"
         />
-        <v-text-field label="ユーザーID" v-model="user"></v-text-field>
+        <v-text-field label="ユーザーID" v-model="user"
+        ></v-text-field>
         <v-text-field type="password" v-model="password" label="パスワード"></v-text-field>
       </v-form>
     </v-card-text>
@@ -50,6 +51,7 @@ export default {
       } else if (account.name !==  this.name){
         alert("お名前が違います")
       } else if (account.password === md5(this.password)) {
+        this.$store.dispatch("login/id", account.id);
         this.$router.push("/");
       } else {
         alert("パスワードが違います");
