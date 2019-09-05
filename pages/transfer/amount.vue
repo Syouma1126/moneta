@@ -8,7 +8,7 @@
         <v-text-field
           name="金額"
           label="金額"
-          type="number"
+          type="number" 
           :value="amount"
           :rules="[v => v < account.total - fee || '残高が不足しています']"
           @input="$store.commit('transfer/amount', $event)"
