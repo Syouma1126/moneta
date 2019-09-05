@@ -8,10 +8,10 @@
         <v-select
           label="お名前"
           item-text="name"
-          item-value="id"
+          item-value="name"
           :items="accounts('ALL')"
           :value="id"
-          @input="$store.dispatch('login/id', $event)"
+          @input="name = $event"
         />
         <v-text-field label="ユーザーID" v-model="user"></v-text-field>
         <v-text-field type="password" v-model="password" label="パスワード"></v-text-field>
@@ -32,6 +32,7 @@ import md5 from "blueimp-md5";
 export default {
   layout: "login",
   data: () => ({
+    name: "",
     user: "",
     password: "",
   }),
@@ -46,6 +47,8 @@ export default {
       );
       if (account === undefined) {
         alert("ユーザーIDが違います");
+      } else if (account.name !==  this.name){
+        alert("お名前が違います")
       } else if (account.password === md5(this.password)) {
         this.$router.push("/");
       } else {
